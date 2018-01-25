@@ -10,7 +10,8 @@ Pod::Spec.new do |s|
   s.platform              = :ios
   s.ios.deployment_target = "8.0"
   s.default_subspecs      = 'CMSSDK'
-  s.dependency 'MOBFoundation' , 'JiMu'
+  s.dependency 'MOBFoundation' 
+  s.dependency 'JiMu' 
 
   s.subspec 'CMSSDK' do |sp|
       sp.vendored_frameworks   = 'SDK/CMSSDK/CMSSDK.framework'
