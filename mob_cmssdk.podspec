@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = 'mob_cmssdk'
-  s.version               = "1.0.0"
+  s.version               = "1.0.0.1"
   s.summary               = 'mob.com 官方提供的内容管理系统 SDK'
   s.license               = 'MIT'
   s.author                = { "mob" => "mobproducts@163.com" }
@@ -16,5 +16,12 @@ Pod::Spec.new do |s|
   s.subspec 'CMSSDK' do |sp|
       sp.vendored_frameworks   = 'SDK/CMSSDK/CMSSDK.framework'
   end
+
+  s.subspec 'CMSSDKUI' do |sp|
+        sp.vendored_frameworks = 'SDK/CMSSDK/CMSSDKUI.framework'
+        sp.resources = 'SDK/CMSSDK/CMSSDKUI.bundle'
+        sp.dependency 'Masonry'
+        sp.dependency 'mob_cmssdk/CMSSDK'
+    end
 
 end
