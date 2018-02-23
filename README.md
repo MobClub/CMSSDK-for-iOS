@@ -1,2 +1,2 @@
-# MobPush-For-iOS
-MobPush for iOS
+# CMSSDK-For-iOS
+CMSSDK for iOS
