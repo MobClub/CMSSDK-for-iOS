@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                  = 'mob_cmssdk'
-  s.version               = "1.0.0.1"
+  s.version               = "1.1.0"
   s.summary               = 'mob.com 官方提供的内容管理系统 SDK'
   s.license               = 'MIT'
   s.author                = { "mob" => "mobproducts@163.com" }

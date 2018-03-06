@@ -59,11 +59,11 @@ function getCommonHtml(page){
 				var html = "";
 				$.each(data,function(index, item){
 					if(index < itemsPerLoad){
-						html += '<li><div class="header"><span class="headimg"><img src="'+ ((item.avatar && item.avatar != "") ? item.avatar : "./img/default_user.png") +'"></span><span>'+ (typeof item.nickName == "undefined" ? "游客" : item.nickName) +'</span></div><div class="center">'+ item.content + '</div><div class="bottom"><span>'+ timeDiff(item.updateAt) +'</span></div></li>'; 
+						html += '<li><div class="header"><span class="headimg"><img src="'+ ((item.avatar && item.avatar != "") ? item.avatar : "./img/default_user.png") +'"></span><span>'+ (typeof item.nickname == "undefined" ? "游客" : item.nickname) +'</span></div><div class="center">'+ item.content + '</div><div class="bottom"><span>'+ timeDiff(item.updateAt) +'</span></div></li>'; 
 					}
 				});
 				$(".common-content ul").append(html);
-				if(pagenum == 0 && resp.comments.length <= itemsPerLoad){
+				if(pagenum == 0 && resp.comments.length < itemsPerLoad){
 					$.detachInfiniteScroll($('.infinite-scroll'));
 					$('.infinite-scroll-preloader').css("display", "none");
 					$(".dz-loading-over span").text("加载完成！");

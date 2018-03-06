@@ -7,14 +7,21 @@
 //
 
 #import "AppDelegate.h"
-#import <ShareSDK/ShareSDK.h>
-#import <CMSSDK/CMSSDK.h>
-#import <UMSSDK/UMSSDK.h>
-#import <CMSSDKUI/CMSArticleListViewController.h>
-
-#import <MOBFoundation/MOBFUser.h>
-
 #import "ViewController.h"
+
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+
+//腾讯开放平台（对应QQ和QQ空间）SDK头文件
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+
+//微信SDK头文件
+#import "WXApi.h"
+
+//新浪微博SDK头文件
+#import "WeiboSDK.h"
+//新浪微博SDK需要在项目Build Settings中的Other Linker Flags添加"-ObjC"
 
 @implementation AppDelegate
 
@@ -24,10 +31,27 @@
     [ShareSDK registerActivePlatforms:@[
                                         @(SSDKPlatformTypeSinaWeibo),
                                         @(SSDKPlatformTypeFacebook),
-                                        @(SSDKPlatformTypeWechat),
                                         @(SSDKPlatformTypeQQ),
+                                        @(SSDKPlatformTypeMail),
+                                        @(SSDKPlatformSubTypeWechatSession),
+                                        @(SSDKPlatformSubTypeWechatTimeline),
                                         ]
                              onImport:^(SSDKPlatformType platformType) {
+                                 
+                                 switch (platformType)
+                                 {
+                                     case SSDKPlatformTypeWechat:
+                                         [ShareSDKConnector connectWeChat:[WXApi class]];
+                                         break;
+                                     case SSDKPlatformTypeQQ:
+                                         [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
+                                         break;
+                                     case SSDKPlatformTypeSinaWeibo:
+                                         [ShareSDKConnector connectWeibo:[WeiboSDK class]];
+                                         break;
+                                     default:
+                                         break;
+                                 }
                                  
                              }
                       onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
@@ -36,25 +60,25 @@
                           {
                               case SSDKPlatformTypeSinaWeibo:
                                   //设置新浪微博应用信息,其中authType设置为使用SSO＋Web形式授权
-                                  [appInfo SSDKSetupSinaWeiboByAppKey:@"568898243"
-                                                            appSecret:@"38a4f8204cc784f81f9f0daaf31e02e3"
-                                                          redirectUri:@"http://www.sharesdk.cn"
+                                  [appInfo SSDKSetupSinaWeiboByAppKey:@"1065584115"
+                                                            appSecret:@"ca6260e975e1ccd0787216f12adf7de6"
+                                                          redirectUri:@"http://cmssdk.mob.com"
                                                              authType:SSDKAuthTypeBoth];
                                   break;
                               case SSDKPlatformTypeFacebook:
                                   //设置Facebook应用信息，其中authType设置为只用SSO形式授权
-                                  [appInfo SSDKSetupFacebookByApiKey:@"107704292745179"
-                                                           appSecret:@"38053202e1a5fe26c80c753071f0b573"
-                                                         displayName:@"shareSDK"
+                                  [appInfo SSDKSetupFacebookByApiKey:@"139095546583473"
+                                                           appSecret:@"7a88cd42e2a6ac171606df65f9c2738b"
+                                                         displayName:@"CMSSDK"
                                                             authType:SSDKAuthTypeBoth];
                                   break;
                               case SSDKPlatformTypeWechat:
-                                  [appInfo SSDKSetupWeChatByAppId:@"wx4868b35061f87885"
-                                                        appSecret:@"64020361b8ec4c99936c0e3999a9f249"];
+                                  [appInfo SSDKSetupWeChatByAppId:@"wxb4de64c75a0924bf"
+                                                        appSecret:@"c57c9b8cd22383612e79d1881c3f9942"];
                                   break;
                               case SSDKPlatformTypeQQ:
-                                  [appInfo SSDKSetupQQByAppId:@"100371282"
-                                                       appKey:@"aed9b0303e3ed1e27bae87c33761161d"
+                                  [appInfo SSDKSetupQQByAppId:@"1106255273"
+                                                       appKey:@"BGyUOnkOROW8IFid"
                                                      authType:SSDKAuthTypeBoth];
                                   break;
                               default:

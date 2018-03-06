@@ -126,7 +126,7 @@
 	function addComment(comment){
 		var data = comment;
 		data.avatar = (data.avatar && data.avatar != "")  ? data.avatar : "./img/default_user.png";
-		var html = '<li class="animated fadeInLeft"><div class="header"><span class="headimg"><img src="'+ data.avatar +'"></span><span>'+ data.nickName +'</span></div><div class="center">'+ data.content + '</div><div class="bottom"><span>'+ timeDiff(data.updateAt) +'</span></div></li>';
+		var html = '<li class="animated fadeInLeft"><div class="header"><span class="headimg"><img src="'+ data.avatar +'"></span><span>'+ data.nickname +'</span></div><div class="center">'+ data.content + '</div><div class="bottom"><span>'+ timeDiff(data.updateAt) +'</span></div></li>';
 		if($(".common-content ul li").length > 0 ){
 			$(".common-content ul li").first().before(html);
 		}else{

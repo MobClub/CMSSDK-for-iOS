@@ -7,7 +7,6 @@
 //
 
 #import <JiMu/JiMu.h>
-#import <MOBFoundation/IMOBFUser.h>
 
 /**
  *  Query类目,用于快速获取CMSSDK的相关视图查询
@@ -47,6 +46,8 @@
  *
  *  @return 查询对象
  */
-+ (JIMUQuery *)recommendListQuety;
++ (JIMUQuery *)recommendListQuery;
+
++ (JIMUQuery *)userBehaviorQuery;
 
 @end

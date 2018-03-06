@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JIMULocationSearchIndex.h"
 
 /**
  地理位置常量

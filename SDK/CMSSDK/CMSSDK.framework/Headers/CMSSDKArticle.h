@@ -8,6 +8,38 @@
 
 #import <JiMu/JIMUDataModel.h>
 
+/**
+ 文章类型
+
+ - CMSArticleTypeHtml: 普通文章
+ - CMSArticleTypeOutside: 站外跳转文章
+ - CMSArticleTypeVideo: 短视频文章
+ - CMSArticleTypeImages: 图片册文章
+ */
+typedef NS_ENUM(NSInteger, CMSArticleType) {
+    CMSArticleTypeHtml = 1,
+    CMSArticleTypeOutside,
+    CMSArticleTypeVideo,
+    CMSArticleTypeImages,
+};
+
+/**
+ 文章展示类型
+ 
+ - CMSArticleDisplayTypeNoImage: 无图纯文字类型
+ - CMSArticleDisplayTypeLeftImage: 左图右文字类型
+ - CMSArticleDisplayTypeRightImage: 右图左文字类型
+ - CMSArticleDisplayTypeBottomImage: 底图上文字类型
+ - CMSArticleDisplayTypeThreeImage: 上文字下三图类型
+ */
+typedef NS_ENUM(NSInteger, CMSArticleDisplayType) {
+    CMSArticleDisplayTypeNoImage = 0,
+    CMSArticleDisplayTypeLeftImage = 1,
+    CMSArticleDisplayTypeRightImage = 2,
+    CMSArticleDisplayTypeBottomImage = 3,
+    CMSArticleDisplayTypeThreeImage = 4
+};
+
 @interface CMSSDKArticle : JIMUDataModel
 
 /**
@@ -23,12 +55,12 @@
 /**
  *  文章类型
  */
-@property (nonatomic, readonly) NSInteger articleType;
+@property (nonatomic, readonly) CMSArticleType articleType;
 
 /**
  *  文章展示类型
  */
-@property (nonatomic, readonly) NSInteger displayType;
+@property (nonatomic, readonly) CMSArticleDisplayType displayType;
 
 /**
  *  文章封面图列表
@@ -79,6 +111,12 @@
  *  是否允许评论
  */
 @property (nonatomic, readonly) BOOL comment;
+
+/**
+ *  文章分享地址
+ */
+@property (nonatomic, copy, readonly) NSString *shareUrl;
+
 
 /**
  *  文章发布时间

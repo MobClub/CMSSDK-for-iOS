@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MOBFoundation/IMOBFUser.h>
+#import <MOBFoundation/MOBFUser.h>
 
 /**
  *  文章列表控制器
@@ -22,7 +22,7 @@
 /**
  *  用户 (若传空,则以游客身份进入;用户可体现在发表评论等相关功能中)
  */
-@property (nonatomic, strong) id<IMOBFUser> user;
+@property (nonatomic, strong) MOBFUser *user;
 
 /**
  *  控制器导航栏左按钮

@@ -105,7 +105,9 @@
 - (void)loginWithGuest
 {
     CMSArticleListViewController *controller = [[CMSArticleListViewController alloc] init];
-    controller.user = nil;
+    
+    [MobSDK clearUser];
+    
     controller.CMSTitle = @"游客登录";
     controller.leftBarButtonItem = [self backItem];
     [self presentViewController:controller animated:YES completion:nil];
@@ -115,8 +117,11 @@
 {
     CMSArticleListViewController *controller = [[CMSArticleListViewController alloc] init];
     
-    id <IMOBFUser> customUser = [MOBFUser userWithUid:@"userin-001" avatar:@"http://tva1.sinaimg.cn/crop.0.2.508.508.180/006qwgkSjw8fbtm8a1ifej30e40e8q3f.jpg" nickname:@"自定义用户的名字"];
-    controller.user = customUser;
+    [MobSDK setUserWithUid:@"uid-12345600"
+                  nickName:@"自定义用户的名字"
+                    avatar:@"http://tva1.sinaimg.cn/crop.0.2.508.508.180/006qwgkSjw8fbtm8a1ifej30e40e8q3f.jpg"
+                  userData:nil];
+    
     controller.CMSTitle = @"自定义用户";
     controller.leftBarButtonItem = [self backItem];
     [self presentViewController:controller animated:YES completion:nil];
@@ -126,11 +131,10 @@
 {
     __weak typeof(self) theController = self;
     [UMSSDK getUserInfoWithResult:^(UMSUser *user, NSError *error) {
-
+       
         if (error == nil && user)
         {
             CMSArticleListViewController *controller = [[CMSArticleListViewController alloc] init];
-            controller.user = [UMSSDK currentUser];
             controller.CMSTitle = @"UMS用户";
             controller.leftBarButtonItem = [self backItem];
             [theController presentViewController:controller animated:YES completion:nil];
@@ -140,31 +144,31 @@
             UMSLoginViewController *login = [[UMSLoginViewController alloc] init];
             login.leftBarButtonItem = [self backItem];
             login.loginHandler = ^(NSError *error){
-
+                
                 if (!error)
                 {
                     [theController dismissViewControllerAnimated:YES completion:^{
-
+                        
                         if ([UMSSDK currentUser])
                         {
                             CMSArticleListViewController *controller = [[CMSArticleListViewController alloc] init];
-                            controller.user = [UMSSDK currentUser];
                             controller.CMSTitle = @"UMS用户";
                             controller.leftBarButtonItem = [self backItem];
                             [theController presentViewController:controller animated:YES completion:nil];
                         }
-
+                        
                     }];
                 }
-
+                
             };
-
+            
             UMSBaseNavigationController *nav = [[UMSBaseNavigationController alloc] initWithRootViewController:login];
             [theController presentViewController:nav animated:YES completion:nil];
-
+ 
         }
-
+        
     }];
+    
 }
 
 - (void)dismiss

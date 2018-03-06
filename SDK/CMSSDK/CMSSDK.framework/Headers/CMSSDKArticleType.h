@@ -7,13 +7,14 @@
 //
 
 #import <JiMu/JIMUDataModel.h>
+#import "CMSSDKArticle.h"
 
 @interface CMSSDKArticleType : JIMUDataModel
 
 /**
  *  分类ID
  */
-@property (nonatomic, copy, readonly) NSString *typeID;
+@property (nonatomic, copy) NSString *typeID;
 
 /**
  *  分类名称
@@ -29,5 +30,10 @@
  *  分类下文章数
  */
 @property (nonatomic, readonly) NSInteger articleNumber;
+
+/**
+ 制定文章类型，如果不设置，默认获取所有类型的文章
+ */
+@property (nonatomic, assign) CMSArticleType type;
 
 @end
